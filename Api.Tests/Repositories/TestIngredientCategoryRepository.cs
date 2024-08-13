@@ -4,7 +4,7 @@ using Faker;
 
 namespace Api.Tests;
 
-public class TestIngredientCategoryRepository : IRepository<IngredientCategory>, IDisposable
+public class TestIngredientCategoryRepository : ICategoryRepository<IngredientCategory>, IDisposable
 {
     private List<IngredientCategory> customerStatuses = new();
 
@@ -65,6 +65,11 @@ public class TestIngredientCategoryRepository : IRepository<IngredientCategory>,
     public void Dispose()
     {
         Dispose(true);
+    }
+
+    public bool IsEmpty(int id)
+    {
+        return false;
     }
 
     #endregion
