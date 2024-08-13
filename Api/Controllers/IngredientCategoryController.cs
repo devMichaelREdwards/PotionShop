@@ -71,7 +71,7 @@ public class IngredientCategoryController : ControllerBase
         if (ingredientCategory.IngredientCategoryId is null)
         {
             errors.Add("error", "No category Id found.");
-            return Ok();
+            return Ok(errors);
         }
 
         int id = (int)ingredientCategory.IngredientCategoryId;
