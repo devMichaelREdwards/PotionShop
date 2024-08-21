@@ -95,7 +95,7 @@ const AdminSideBar = () => {
                 </Sidenav.Body>
             </Sidenav>
             <div className='admin-bottom-nav'>
-                <AdminNavButton title={'My Account'} action={logout} />
+                <AdminNavButton title={'My Account'} action={() => navigate('account')} />
                 <AdminNavButton title={'Logout'} action={logout} />
                 <div className='admin-copyright'>
                     <CopyrightText />

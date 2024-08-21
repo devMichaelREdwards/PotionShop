@@ -337,5 +337,27 @@ public class AuthService : IAuthService
         return true;
     }
 
+    public EmployeeUser GetEmployeeUser(string userName)
+    {
+        EmployeeAccount account = (employeeAccounts as EmployeeAccountRepository)!.GetByUserName(
+            userName
+        );
+
+        if (account?.EmployeeId is null)
+            return null;
+
+        int employeeId = (int)account.EmployeeId;
+        Employee employeeData = employees.GetById(employeeId);
+
+        EmployeeUser user = new EmployeeUser()
+        {
+            UserName = userName,
+            Email = account.Email,
+            Employee = mapper.Map<EmployeeDto>(employeeData)
+        };
+
+        return user;
+    }
+
     #endregion
 }

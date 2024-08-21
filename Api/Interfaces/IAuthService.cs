@@ -12,6 +12,7 @@ public interface IAuthService
     string UpdateRefreshToken(UserLoginDto user);
     void ClearRefreshToken(UserLogoutDto user);
     CustomerUser GetCustomerUser(ClaimsPrincipal userClaims);
+    EmployeeUser GetEmployeeUser(string userName);
     string GetEmployeePositionString(string userName);
     bool CheckEmployeeRefreshToken(string userName, string refreshToken);
 }

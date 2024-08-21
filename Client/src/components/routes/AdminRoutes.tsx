@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import EmployeeLoginPage from '../admin/pages/users/AdminLoginPage';
-import AdminDashboardPage from '../admin/pages/general/DashboardPage';
+import AdminDashboardPage from '../admin/pages/general/AdminDashboardPage';
 import AdminRedirect from '../admin/redirect/AdminRedirect';
 import { AuthProvider } from '../../context/AuthContext';
 import CustomerPage from '../admin/pages/users/CustomerPage';
@@ -14,6 +14,7 @@ import OrderListingPage from '../admin/pages/orders/orders/OrderListingPage';
 import EmployeeListingPage from '../admin/pages/users/EmployeePage';
 import CustomerFormPage from '../admin/pages/users/customers/CustomerFormPage';
 import EmployeeFormPage from '../admin/pages/users/employees/EmployeeForm';
+import AdminAccountPage from '../admin/pages/general/AdminAccountPage';
 
 const AdminRoutes = () => {
     return (
@@ -33,6 +34,7 @@ const AdminRoutes = () => {
                     <Route path='effects' element={<EffectPage />} />
                     <Route path='orders' element={<OrderListingPage />} />
                     <Route path='receipts' element={<ReceiptListingPage />} />
+                    <Route path='account' element={<AdminAccountPage />} />
                 </Route>
                 <Route path='admin' element={<AdminRedirect allowedRoles={['Owner']} />}>
                     <Route path='' element={<AdminDashboardPage />} />

@@ -52,7 +52,7 @@ public class EmployeeController : ControllerBase
         if (employee.EmployeeId == null)
             return Ok();
 
-        Employee existing = employees.GetById((int)employee.EmployeeId);
+        Employee existing = employees.GetById((int)employee.EmployeeId)!;
         employee.Update(existing);
         employees.Update(existing);
 
@@ -66,5 +66,27 @@ public class EmployeeController : ControllerBase
         if (employee.EmployeeId != null)
             employees.Delete((int)employee.EmployeeId);
         return Ok();
+    }
+
+    [Authorize(Roles = "Employee,Owner")]
+    [HttpGet("account")]
+    public IActionResult GetAccountInfo()
+    {
+        if (
+            Request.Cookies["potionShoppeUserName"] == null
+        )
+        {
+            return Ok(false);
+        }
+
+        string userName = Request.Cookies["potionShoppeUserName"]!;
+        Employee employee = (employees as IAccountRepository<Employee>)!.GetByUserName(userName);
+
+        if (employee is null)
+        {
+            return Ok("Invalid request");
+        }
+
+        return Ok(employee);
     }
 }

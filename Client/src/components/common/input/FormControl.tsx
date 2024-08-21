@@ -36,6 +36,23 @@ export const TextControl = ({ value, label, placeholder, name, error, onChange }
     );
 };
 
+interface IDisabledInput {
+    value: string | number | readonly string[] | undefined;
+    placeholder?: string;
+    label?: string;
+    name: string;
+    error?: string;
+}
+
+export const DisabledControl = ({ value, placeholder, label, error, name }: IDisabledInput) => {
+    return (
+        <span className='form-control'>
+            <Form.ControlLabel className='form-control-label'>{label}</Form.ControlLabel>
+            <Form.Control className='form-control-input' value={value} placeholder={placeholder} name={name} errorMessage={error} disabled />
+        </span>
+    );
+};
+
 export const TextAreaControl = ({ value, label, placeholder, name, onChange }: IInput) => {
     return (
         <span className='form-control text-area'>

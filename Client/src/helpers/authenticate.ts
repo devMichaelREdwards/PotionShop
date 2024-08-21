@@ -10,3 +10,8 @@ export const refreshEmployee = async () => {
     const res = await axios.get('user/employee/refresh', { withCredentials: true });
     return res?.data ?? false;
 };
+
+export const getEmployeeAccountData = async () => {
+    const res = await axios.get('user/employee/account', { withCredentials: true });
+    return res?.data ?? false;
+};

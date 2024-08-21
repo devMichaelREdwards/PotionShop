@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 import { IData } from '../types/IData';
 import { API_URL } from '../api/api';
 
-export const useData = (source: string) => {
+export const useData = (source: string, withCredentials?: boolean) => {
     const [data, setData] = useState<IData[]>([]);
     const [loading, setLoading] = useState(true);
     const [draw, setDraw] = useState(0);
@@ -15,7 +15,7 @@ export const useData = (source: string) => {
         const getData = async () => {
             if (source.length) {
                 try {
-                    const result = await axios.get(`${API_URL}/${source}`, user?.authConfig);
+                    const result = await axios.get(`${API_URL}/${source}`, { ...user?.authConfig, withCredentials: withCredentials ?? false });
                     setData(result.data);
                 } catch (e) {
                     setError('Unknown Error occurred');

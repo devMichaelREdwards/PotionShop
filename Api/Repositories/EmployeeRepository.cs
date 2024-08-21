@@ -4,7 +4,7 @@ using PagedList;
 
 namespace Api.Data;
 
-public class EmployeeRepository : IListingRepository<Employee>, IDisposable
+public class EmployeeRepository : IListingRepository<Employee>, IAccountRepository<Employee>, IDisposable
 {
     private PotionShoppeContext _context;
 
@@ -16,11 +16,21 @@ public class EmployeeRepository : IListingRepository<Employee>, IDisposable
     public IEnumerable<Employee> Get()
     {
         var employees = _context.Employees
-    .Include(e => e.EmployeeStatus)
-    .Include(e => e.EmployeePosition)
-    .Include(e => e.EmployeeAccounts)
-    .AsQueryable();
+            .Include(e => e.EmployeeStatus)
+            .Include(e => e.EmployeePosition)
+            .Include(e => e.EmployeeAccounts)
+            .AsQueryable();
         return [.. employees];
+    }
+
+    public Employee GetByUserName(string userName)
+    {
+        var employee = _context.Employees
+            .Include(e => e.EmployeeStatus)
+            .Include(e => e.EmployeePosition)
+            .Include(e => e.EmployeeAccounts)
+            .Where(e => e.EmployeeAccounts.First().UserName == userName).First();
+        return employee;
     }
 
     public IEnumerable<Employee> GetListing(IFilter<Employee>? filter = null, Pagination? page = null, SortOrder? sortOrder = null)
