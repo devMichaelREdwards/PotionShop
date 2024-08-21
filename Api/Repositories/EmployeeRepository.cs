@@ -29,6 +29,8 @@ public class EmployeeRepository : IListingRepository<Employee>, IAccountReposito
             .Include(e => e.EmployeeStatus)
             .Include(e => e.EmployeePosition)
             .Include(e => e.EmployeeAccounts)
+            .Include(e => e.Potions)
+            .Include(e => e.Receipts)
             .Where(e => e.EmployeeAccounts.First().UserName == userName).First();
         return employee;
     }

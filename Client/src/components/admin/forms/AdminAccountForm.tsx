@@ -9,7 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const AdminAccountForm = () => {
     const { user } = useAuth();
-    const { data, loading } = useData(user ? 'employee/account' : '', true);
+    const { data, loading } = useData('employee/account', true);
     const { submitting, errors, submitForm } = useSubmit('', 'Account Saved', 'An error occurred! Please correct the errors and try again.');
 
     useEffect(() => {
