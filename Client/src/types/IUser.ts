@@ -9,3 +9,11 @@ export interface IAdminUser {
 }
 
 export type EmployeeRole = 'Employee' | 'Owner';
+
+export interface IEmployeeAccountInfo {
+    employeeId: number;
+    position: string;
+    status: string;
+    firstName: string;
+    lastName: string;
+}

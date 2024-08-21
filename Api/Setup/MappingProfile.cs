@@ -71,6 +71,25 @@ public class MappingProfile : Profile
                         Email = e.EmployeeAccounts.First().Email
                     }
             );
+
+        CreateMap<Employee, EmployeeAccountForm>()
+        .ConvertUsing(
+            e =>
+                new()
+                {
+                    EmployeeId = e.EmployeeId,
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    EmployeePosition = e.EmployeePosition.Title,
+                    EmployeePositionId = e.EmployeePositionId,
+                    EmployeeStatus = e.EmployeeStatus.Title,
+                    EmployeeStatusId = e.EmployeeStatusId,
+                    UserName = e.EmployeeAccounts.First().UserName,
+                    Email = e.EmployeeAccounts.First().Email,
+                    Potions = EmployeeAccountForm.BuildPotionsList(e),
+                    Receipts = EmployeeAccountForm.BuildReceiptsList(e)
+                }
+        );
     }
 
     private void CreateEffectMappings()

@@ -80,13 +80,13 @@ public class EmployeeController : ControllerBase
         }
 
         string userName = Request.Cookies["potionShoppeUserName"]!;
-        Employee employee = (employees as IAccountRepository<Employee>)!.GetByUserName(userName);
+        Employee employee = (employees as IAccountRepository<Employee>)!.GetAccountForm(userName);
 
         if (employee is null)
         {
             return Ok("Invalid request");
         }
 
-        return Ok(employee);
+        return Ok(mapper.Map<EmployeeAccountForm>(employee));
     }
 }

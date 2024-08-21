@@ -23,14 +23,20 @@ public class EmployeeRepository : IListingRepository<Employee>, IAccountReposito
         return [.. employees];
     }
 
-    public Employee GetByUserName(string userName)
+    public Employee GetAccountForm(string userName)
     {
         var employee = _context.Employees
             .Include(e => e.EmployeeStatus)
             .Include(e => e.EmployeePosition)
             .Include(e => e.EmployeeAccounts)
             .Include(e => e.Potions)
+            .ThenInclude(p => p.Product)
+            .Include(e => e.Potions)
+            .ThenInclude(p => p.PotionEffects)
+            .ThenInclude(pe => pe.Effect)
             .Include(e => e.Receipts)
+            .ThenInclude(r => r.Order)
+            .ThenInclude(o => o!.Customer)
             .Where(e => e.EmployeeAccounts.First().UserName == userName).First();
         return employee;
     }
@@ -105,7 +111,7 @@ public class EmployeeRepository : IListingRepository<Employee>, IAccountReposito
 
     public void Delete(int id)
     {
-        Employee employee = _context.Employees.Find(id);
+        Employee employee = _context.Employees.Find(id)!;
         _context.Employees.Remove(employee);
         Save();
     }

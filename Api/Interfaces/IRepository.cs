@@ -14,7 +14,7 @@ public interface IRepository<T>
 
 public interface IAccountRepository<T> : IRepository<T>
 {
-    T GetByUserName(string userName);
+    T GetAccountForm(string userName);
 }
 
 public interface IListingRepository<T> : IRepository<T>

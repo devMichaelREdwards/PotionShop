@@ -11,8 +11,6 @@ public partial class EmployeeDto : IDto<Employee>
     public EmployeeStatusDto? EmployeeStatus { get; set; }
     public int? EmployeePositionId { get; set; }
     public int? EmployeeStatusId { get; set; }
-    public DateOnly? DateHired { get; set; }
-    public DateOnly? DateTerminated { get; set; }
 
     public bool Equals(Employee? other)
     {
