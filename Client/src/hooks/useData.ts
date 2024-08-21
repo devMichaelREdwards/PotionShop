@@ -34,7 +34,7 @@ export const useData = (source: string, withCredentials?: boolean) => {
     return { data, draw, loading, error, refresh, setLoading };
 };
 
-export const useID = (source: string) => {
+export const useID = (source: string, withCredentials?: boolean) => {
     const [data, setData] = useState<IData>();
     const [loading, setLoading] = useState(true);
     const [draw, setDraw] = useState(0);
@@ -45,7 +45,7 @@ export const useID = (source: string) => {
         const getData = async () => {
             if (source.length) {
                 try {
-                    const result = await axios.get(`${API_URL}/${source}`, user?.authConfig);
+                    const result = await axios.get(`${API_URL}/${source}`, { ...user?.authConfig, withCredentials: withCredentials ?? false });
                     setData(result.data);
                 } catch (e) {
                     setError('Unknown Error occurred');
@@ -55,7 +55,7 @@ export const useID = (source: string) => {
             setLoading(false);
         };
         getData();
-    }, [source, draw, user?.authConfig]);
+    }, [source, draw, user?.authConfig, withCredentials]);
 
     const refresh = () => {
         setDraw(draw + 1);

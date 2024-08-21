@@ -16,4 +16,6 @@ export interface IEmployeeAccountInfo {
     status: string;
     firstName: string;
     lastName: string;
+    userName: string;
+    email: string;
 }
